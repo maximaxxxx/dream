@@ -1,0 +1,220 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;600&display=swap');
+
+/* RESET + BASE */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  font-family: 'Poppins', sans-serif;
+  transition: background 0.6s ease, color 0.6s ease;
+  background: linear-gradient(135deg, #ffb347, #e747ff);
+  color: #222;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Mode sombre */
+html.dark, body.dark {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #f0e6f6;
+}
+
+/* Mode nuit décoratif */
+body.dark::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(2px 2px at 20% 30%, #fff, transparent),
+    radial-gradient(2px 2px at 50% 10%, #fff, transparent),
+    radial-gradient(2px 2px at 80% 25%, #fff, transparent),
+    radial-gradient(2px 2px at 10% 60%, #fff, transparent),
+    radial-gradient(2px 2px at 60% 80%, #fff, transparent),
+    radial-gradient(2px 2px at 90% 70%, #fff, transparent);
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+/* Dashboard container */
+.dashboard-container {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 20px 30px;
+  background: rgba(255,255,255,0.85);
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.15);
+  position: relative;
+}
+
+body.dark .dashboard-container {
+  background: rgba(0,0,0,0.32);
+  box-shadow: 0 0 20px #ffffff40;
+}
+
+/* Titres */
+.dashboard-container h1 {
+  
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Message d'erreur ou confirmation */
+.error {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #e74c3c;
+}
+
+/* Formulaire d'ajout */
+.add-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.add-form input[type="text"] {
+  flex: 1 1 120px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+}
+
+body.dark .add-form input[type="text"] {
+  background: rgba(0,0,0,0.32);
+  color: #f0e6f6;
+  border: 1px solid #444;
+}
+
+.add-form button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #007bff;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.add-form button:hover {
+  background-color: #0056b3;
+  transform: scale(1.02);
+}
+
+/* Tableau responsive */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  text-align: center;
+  word-break: break-word;
+}
+
+body.dark table th, body.dark table td {
+  border: 1px solid #444;
+}
+
+table th {
+  background-color: #007bff;
+  color: #fff;
+  font-weight: 600;
+}
+
+body.dark table th {
+  background-color: #0056b3;
+}
+
+/* Boutons dans tableau */
+table button.inscription {
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+table button.inscription:hover {
+  transform: scale(1.05);
+}
+
+table button[style*="background:#e74c3c"] {
+  background: #e74c3c;
+  color: #fff;
+}
+
+table button[style*="background:#e74c3c"]:hover {
+  background: #c0392b;
+}
+
+/* Mode nuit bouton toggle */
+.modenuit {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 60px;
+  height: 60px;
+  z-index: 20;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.modenuit:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
+/* Sélecteur de table */
+.table-select {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.table-select select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+}
+
+body.dark .table-select select {
+  background: rgba(0,0,0,0.32);
+  color: #f0e6f6;
+  border: 1px solid #444;
+}
+
+/* Flèche retour à l'accueil */
+.home-icon-dashboard {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  z-index: 10;
+}
+
+.home-icon-dashboard:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}

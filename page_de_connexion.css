@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;600&display=swap');
+/* RESET + BASE */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  transition: background 0.6s ease, color 0.6s ease;
+  background: linear-gradient(135deg, #ffb347, #e747ff); /* light mode */
+  color: #222;
+  overflow: hidden;
+}
+
+/* Mode sombre */
+body.dark {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #f0e6f6;
+}
+
+body.dark::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(2px 2px at 20% 30%, #fff, transparent),
+    radial-gradient(2px 2px at 50% 10%, #fff, transparent),
+    radial-gradient(2px 2px at 80% 25%, #fff, transparent),
+    radial-gradient(2px 2px at 10% 60%, #fff, transparent),
+    radial-gradient(2px 2px at 60% 80%, #fff, transparent),
+    radial-gradient(2px 2px at 90% 70%, #fff, transparent);
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+/* FORMULAIRE */
+form {
+  width: 400px;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 1;
+}
+
+body.dark form {
+  background: rgb(0 0 0 / 32%);
+    color: #f0f0f0;
+    box-shadow: 0 0 20px #ffffff40;
+}
+
+
+
+form p {
+  color: #e74c3c;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* LABELS */
+form label {
+  font-weight: 600;
+  color: inherit;
+}
+
+/* CHAMPS */
+form input[type="text"],
+form input[type="password"] {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background-color: #fff;
+  color: #222;
+  transition: border-color 0.3s ease;
+}
+
+form input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+body.dark form input {
+  background: rgb(0 0 0 / 32%);
+  color: #f0f0f0;
+  border: 1px solid #444;
+}
+
+/* BOUTON */
+form button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #007bff;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+form button:hover {
+  background-color: #0056b3;
+  transform: scale(1.02);
+}
+
+
+.modenuit {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 60px;
+  height: 60px;
+  margin: 0;
+  z-index: 20;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+      .modenuit:hover {
+        transform: scale(1.1);
+        filter: brightness(1.2);
+      }
+
+
+/* TITRE */
+form h1 {
+  position: relative;
+  display: flex;
+  align-items: center;       /* ✅ centre verticalement texte et icône */
+  justify-content: center;   /* ✅ centre le texte horizontalement */
+  font-size: 2.5rem;
+  font-family: 'Great Vibes', cursive;
+  margin-bottom: 10px;
+  min-height: 60px;          /* ✅ donne une hauteur suffisante pour l’icône */
+}
+
+/* Icône maison */
+.home-icon {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%); /* ✅ centre verticalement l’image dans le h1 */
+  width: 40px;
+  height: auto;
+  cursor: pointer;
+}
+
+
+.inscription {
+  padding-top: 5px;
+  padding: 10px;
+  border: none;
+
+  border-radius: 8px;
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.7rem;
+  cursor: pointer;
+  align-self: center;
+  text-decoration: none;
+  width: 70%;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.inscription:hover {
+  background-color: #0056b3;
+  transform: scale(1.02);
+}
