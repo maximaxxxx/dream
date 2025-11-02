@@ -18,7 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: connexion.php');
         exit;
     }
-
     // Suppression du compte
     if ($action === 'supprimer') {
         try {
@@ -60,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if (isset($erreur)): ?>
             <p style="color:red;"><?= htmlspecialchars($erreur) ?></p>
         <?php endif; ?>
-
+        <a href="dashboard.php" class="dashboard-btn">Aller au Dashboard</a>
         <button type="submit" name="action" value="deconnexion" style="background-color:#007bff;">
             Se déconnecter
         </button>
@@ -68,6 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 onclick="return confirm('⚠️ Voulez-vous vraiment supprimer votre compte ? Cette action est irréversible.')">
             Supprimer mon compte
         </button>
+        
 
         <a href="index.php" class="inscription">Retour à l'accueil</a>
     </form>

@@ -154,3 +154,30 @@ form button[value="supprimer"]:hover {
   transform: scale(1.1);
   filter: brightness(1.2);
 }
+
+/* Bouton Dashboard */
+.dashboard-btn {
+  display: inline-block;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #28a745; /* Vert */
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.dashboard-btn:hover {
+  background-color: #218838;
+  transform: scale(1.03);
+}
+
+
+body.dark .dashboard-btn {
+  background-color: #2ecc71;
+}
+
+body.dark .dashboard-btn:hover {
+  background-color: #27ae60;
+}
