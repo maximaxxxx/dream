@@ -124,14 +124,25 @@ document.addEventListener("DOMContentLoaded", function() {
         
 
         // Requêtes SQL
-        if ($nom_table == "PEUR") 
+        if ($nom_table == "PEUR")           
             {
             $query = $conn->query("SELECT * FROM PEUR;");
             $resultat_peur = $query->fetchAll();
 
             // Afficher le résultat dans un tableau
-
-            print("<table border=5>");
+            print('<form method="post" action="index.php">
+                    <label for="liste"> <b><u> Recherche:</u></b><br>
+                    <select name="choix1" id="liste">');
+            foreach ($resultat_peur as $key => $variable)
+            
+            {
+                print("<option value='".$resultat_peur[$key]["id_peur"]."'>".$resultat_peur[$key]["nom_peur"]."</option>");
+            }
+            print('</select> <br>
+                    <input type="submit" value="Ok" name="valider1"/>
+                    </form>');
+                
+            print("<table border=2>");
             print("<tr>");
             print("<th>Nom</th>");
             print("<th>Theme</th>");
@@ -145,16 +156,8 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             print("</table>");
         
-            print('<form method="post" action="index.php">
-                    <label for="liste"> <b><u> Recherche:</u></b><br>
-                    <select name="choix1" id="liste">');
-            foreach ($resultat_peur as $key => $variable)
-            {
-                print("<option value='".$resultat_peur[$key]["id_peur"]."'>".$resultat_peur[$key]["nom_peur"]."</option>");
-            }
-            print('</select> <br>
-                    <input type="submit" value="Ok" name="valider1"/>
-                    </form>');
+            
+            
         }
         
                 
@@ -321,7 +324,17 @@ document.addEventListener("DOMContentLoaded", function() {
             $resultat_trouble = $query->fetchAll();
 
             // Afficher le résultat dans un tableau
-
+            print('<form method="post" action="index.php">
+                    <label for="liste"> <b><u> Recherche type de trouble de sante:</u></b><br>
+                    <select name="choix1" id="liste">');
+            foreach ($resultat_trouble as $key => $variable)
+            {
+                print("<option value='".$resultat_trouble[$key]["id_trouble_de_sante"]."'>".$resultat_trouble[$key]["nom"]."</option>");
+            }
+            print('</select> <br>
+                    <input type="submit" value="Ok" name="valider2"/>
+                    </form>');
+        
             print("<table border=5>");
             print("<tr>");
             print("<th>Type de trouble</th>");
@@ -335,17 +348,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 print("<tr>");
             }
             print("</table>");
-            print('<form method="post" action="index.php">
-                    <label for="liste"> <b><u> Recherche type de trouble de sante:</u></b><br>
-                    <select name="choix1" id="liste">');
-            foreach ($resultat_trouble as $key => $variable)
-            {
-                print("<option value='".$resultat_trouble[$key]["id_trouble_de_sante"]."'>".$resultat_trouble[$key]["nom"]."</option>");
-            }
-            print('</select> <br>
-                    <input type="submit" value="Ok" name="valider2"/>
-                    </form>');
-        
+            
         }
                 elseif ($nom_table == "TYPE_ELEMENT_DANS_LE_REVE") 
             {
@@ -443,3 +446,4 @@ document.addEventListener("DOMContentLoaded", function() {
     ?>
         </body>
 </html>
+
