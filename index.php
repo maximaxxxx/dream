@@ -16,7 +16,7 @@ session_start();
 
 <body>
 <div id="connexion">
-    <!-- Bouton mode jour/nuit -->
+    <!-- Bouton mode jour/nuit banane-->
     <img src="https://cdn-icons-png.flaticon.com/512/6714/6714978.png" alt="Mode nuit" class="modenuit" id="toggleTheme">
 
     <?php if (isset($_SESSION['identifiant'])): ?>
