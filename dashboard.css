@@ -1,4 +1,7 @@
 /* Google Fonts */
+/* On importe deux polices depuis Google Fonts :
+   - "Great Vibes" → pour les titres élégants
+   - "Poppins" → police moderne et lisible pour le reste du texte */
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;600&display=swap');
 
 /* RESET + BASE */
@@ -8,6 +11,11 @@
   box-sizing: border-box;
 }
 
+/* Corps de la page :
+   - Linear-gradient pour le fond clair par défaut
+   - Transitions pour des changements doux (ex: mode nuit)
+   - overflow-y:auto pour scroller verticalement
+   - overscroll-behavior:none pour désactiver le rebond sur mobile */
 html, body {
   width: 100%;
   min-height: 100%;
@@ -20,15 +28,21 @@ html, body {
 }
 
 /* Mode sombre */
+/* On applique un autre dégradé de fond et une couleur de texte claire.
+   L’utilisation de "html.dark" ET "body.dark" permet de supporter 
+   plusieurs façons d’activer le mode sombre (via JS ou CSS). */
 html.dark, body.dark {
   background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
   color: #f0e6f6;
 }
 
-/* Mode nuit décoratif */
+/* Mode nuit décoratif ÉTOILES DE LA NUIT */
+/* Ce pseudo-élément crée un effet d’étoiles scintillantes :
+   - Plusieurs petits cercles blancs (radial-gradient)
+   - Répétés sur tout l’écran*/
 body.dark::before {
   content: '';
-  position: fixed;
+  position: fixed; /*position:fixed pour rester fixe même en scrollant*/
   top: 0; left: 0; right: 0; bottom: 0;
   background:
     radial-gradient(2px 2px at 20% 30%, #fff, transparent),
@@ -39,12 +53,16 @@ body.dark::before {
     radial-gradient(2px 2px at 90% 70%, #fff, transparent);
   background-repeat: repeat;
   background-size: 200px 200px;
-  pointer-events: none;
+  pointer-events: none; /*pointer-events:none pour ne pas bloquer les clics*/
   z-index: 0;
-  opacity: 0.6;
+  opacity: 0.6; /*opacity:0.6 pour un effet subtil */
 }
 
 /* Dashboard container */
+/* Bloc principal du tableau de bord.
+   max-width limite la largeur pour un centrage harmonieux.
+   background semi-transparent pour laisser voir le dégradé derrière.
+   box-shadow pour un effet de "carte" en relief. */
 .dashboard-container {
   max-width: 1000px;
   margin: 50px auto;
@@ -55,6 +73,7 @@ body.dark::before {
   position: relative;
 }
 
+/* Version sombre : fond transparent noir et lueur blanche */
 body.dark .dashboard-container {
   background: rgba(0,0,0,0.32);
   box-shadow: 0 0 20px #ffffff40;
@@ -69,6 +88,7 @@ body.dark .dashboard-container {
 }
 
 /* Message d'erreur ou confirmation */
+/* Classe générique pour afficher des erreurs ou succès. */
 .error {
   text-align: center;
   font-weight: 600;
@@ -79,11 +99,13 @@ body.dark .dashboard-container {
 /* Formulaire d'ajout */
 .add-form {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Le flex-wrap permet d’aller à la ligne si l’écran est petit. */
   gap: 10px;
   margin-bottom: 20px;
 }
 
+/* Champ texte adaptable (flex:1 1 120px) :
+   ça veut dire qu’il peut grandir mais pas descendre en dessous de 120px. */
 .add-form input[type="text"] {
   flex: 1 1 120px;
   padding: 10px;
@@ -92,17 +114,20 @@ body.dark .dashboard-container {
   font-size: 0.95rem;
 }
 
+/* Version sombre du champ texte */
 body.dark .add-form input[type="text"] {
   background: rgba(0,0,0,0.32);
   color: #f0e6f6;
   border: 1px solid #444;
 }
 
+
+/* Bouton d’ajout avec transition et effet hover */
 .add-form button {
   padding: 10px 20px;
   border: none;
   border-radius: 8px;
-  background-color: #007bff;
+  background-color: #007bff; /* bleu principal */
   color: #fff;
   font-weight: 600;
   cursor: pointer;
@@ -110,34 +135,38 @@ body.dark .add-form input[type="text"] {
 }
 
 .add-form button:hover {
-  background-color: #0056b3;
+  background-color: #0056b3; /* bleu plus foncé au survol */
   transform: scale(1.02);
 }
 
 /* Tableau responsive */
 table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: collapse; /* supprime les espaces entre cellules */
   margin-bottom: 20px;
 }
 
+/* Cellules du tableau */
 table th, table td {
   border: 1px solid #ccc;
   padding: 8px 12px;
   text-align: center;
-  word-break: break-word;
+  word-break: break-word; /* évite que le texte déborde */
 }
 
+/* Bordures plus sombres en mode nuit */
 body.dark table th, body.dark table td {
   border: 1px solid #444;
 }
 
+/* En-tête du tableau (th) */
 table th {
   background-color: #007bff;
   color: #fff;
   font-weight: 600;
 }
 
+/* Version sombre du header */
 body.dark table th {
   background-color: #0056b3;
 }
@@ -153,19 +182,23 @@ table button.inscription {
 }
 
 table button.inscription:hover {
-  transform: scale(1.05);
+  transform: scale(1.05); /* petit effet de zoom au survol */
 }
 
+/* Ciblage par attribut [style*="background:#e74c3c"]
+   → utile si certains boutons ont un style en ligne (inline style)
+   → ici on les rend rouges */
 table button[style*="background:#e74c3c"] {
   background: #e74c3c;
   color: #fff;
 }
 
 table button[style*="background:#e74c3c"]:hover {
-  background: #c0392b;
+  background: #c0392b; /* rouge plus foncé */
 }
 
-/* Mode nuit bouton toggle */
+/* Mode nuit bouton */
+/* Placé en haut à gauche, rond, avec effet d’agrandissement au survol */
 .modenuit {
   position: fixed;
   top: 20px;
@@ -184,6 +217,7 @@ table button[style*="background:#e74c3c"]:hover {
 }
 
 /* Sélecteur de table */
+/* Permet de choisir une table ou catégorie avant affichage */
 .table-select {
   text-align: center;
   margin-bottom: 20px;
@@ -196,6 +230,7 @@ table button[style*="background:#e74c3c"]:hover {
   border: 1px solid #ccc;
 }
 
+/* Style sombre du select */
 body.dark .table-select select {
   background: rgba(0,0,0,0.32);
   color: #f0e6f6;
@@ -203,6 +238,7 @@ body.dark .table-select select {
 }
 
 /* Flèche retour à l'accueil */
+/* Petite flèche ou icône "maison" fixée dans le coin haut gauche. */
 .home-icon-dashboard {
   position: absolute;
   top: 20px;

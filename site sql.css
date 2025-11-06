@@ -1,27 +1,31 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;600&display=swap');
 
+/* --- Réglages généraux du document --- */
 html, body {
-  margin: 0;
+  margin: 0;  
   padding: 0;
   border: 0;
   overscroll-behavior: none;
   overflow-x: hidden;
   position: relative;
   min-height: 100vh;
-  font-family: 'Poppins', sans-serif; 
-  transition: background 0.6s ease, color 0.6s ease;
+  font-family: 'Poppins', sans-serif; /* police moderne principale */
+  transition: background 0.6s ease, color 0.6s ease; /* effet fluide quand on change de thème */
 }
 
+/* --- Thème sombre (dark mode) --- */
       body.dark {
-        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-        color: #f0e6f6;
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);  /* dégradé sombre bleu-gris */
+        color: #f0e6f6; /* texte clair */
       }
 
+/* --- Effet d’étoiles dans le fond en mode sombre --- */
       body.dark::before {
         content: '';
         position: fixed;
         top: 0; left: 0; right: 0; bottom: 0;
+/* plusieurs petits points blancs pour simuler des étoiles */
         background:
           radial-gradient(2px 2px at 20% 30%, #fff, transparent),
           radial-gradient(2px 2px at 50% 10%, #fff, transparent),
@@ -31,38 +35,41 @@ html, body {
           radial-gradient(2px 2px at 90% 70%, #fff, transparent);
         background-repeat: repeat;
         background-size: 200px 200px;
-        pointer-events: none;
+        pointer-events: none; /* pour ne pas gêner les clics */
         z-index: 0;
         opacity: 0.6;
       }
 
-
+/* --- Thème clair (light mode) --- */
       body.light {
-        background: linear-gradient(123deg, #ffb347, #e747ff);
+        background: linear-gradient(123deg, #ffb347, #e747ff); /* dégradé coloré rose/orange */
         color: #ffffff;
       }
 
       body.light::before {
-        content: none;
+        content: none; /* pas d’étoiles en mode clair */
       }
 
+      
+/* --- En-tête principal du site --- */
 #header {
-  font-family: 'Great Vibes', cursive;
+  font-family: 'Great Vibes', cursive; /* police manuscrite décorative */
   font-size: 4rem;
   text-align: center;
   padding: 60px 20px 40px;
   position: relative;
   z-index: 1;
-  transition: color 0.6s ease, text-shadow 0.6s ease;
+  transition: color 0.6s ease, text-shadow 0.6s ease; /* animation douce sur les couleurs */
 }
 
+/* --- Styles spécifiques selon le thème --- */
         body.dark #header {
-          color: #ffd700;
+          color: #ffd700; /* texte doré */
           text-shadow:
             0 0 10px #ffd700,
             0 0 20px #ffb347,
             0 0 30px #ffd700,
-            0 0 40px #fffacd;
+            0 0 40px #fffacd;  /* effet lumineux doré */
         }
 
         body.light #header {
@@ -75,6 +82,7 @@ html, body {
   margin-top: 10px;
 }
 
+/* --- Style des sections de contenu --- */
 section {
   max-width: 700px;
   margin: 30px auto;
@@ -83,26 +91,27 @@ section {
   transition: background 0.6s ease, color 0.6s ease, box-shadow 0.4s ease;
 }
 
-
+/* --- Section sombre transparente et lumineuse --- */
       body.dark section {
         background: rgb(0 0 0 / 32%);
         color: #f0f0f0;
         box-shadow: 0 0 20px #ffffff40;
       }
 
-
+/* --- Section claire opaque --- */
       body.light section {
         background: rgba(255, 255, 255, 0.85);
         color: #222;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
       }
 
-
+/* --- Formulaire : alignement et style des champs --- */
 form {
   text-align: center;
   margin-top: 20px;
 }
 
+/* --- Style commun aux menus déroulants et boutons --- */
 select, input[type="submit"] {
   font-family: 'Poppins', sans-serif;
   padding: 8px 12px;
@@ -113,6 +122,7 @@ select, input[type="submit"] {
   transition: background 0.3s ease, color 0.3s ease;
 }
 
+/* --- Boutons adaptés au thème --- */
         body.dark select, body.dark input[type="submit"] {
           background-color: #1c252e;
           color: #f0e6f6;
@@ -124,11 +134,13 @@ select, input[type="submit"] {
           border: 1px solid #ccc;
         }
 
+/* --- Effet de zoom au survol du bouton --- */
 input[type="submit"]:hover {
   cursor: pointer;
   transform: scale(1.05);
 }
 
+/* --- Tableaux : centrage et style fluide --- */
 table {
   margin: 30px auto;
   border-collapse: collapse;
@@ -139,11 +151,13 @@ table {
   transition: background 0.3s ease;
 }
 
+/* --- Cellules du tableau --- */
       th, td {
         padding: 10px;
         border: 1px solid rgba(255,255,255,0.2);
       }
 
+/* --- Style du tableau selon le thème --- */
       body.dark table {
         background: rgba(255, 255, 255, 0.05);
         color: #fff;
@@ -155,7 +169,7 @@ table {
         border: 1px solid #ccc;
       }
 
-
+/* --- Bouton de connexion ou menu utilisateur (en haut à droite) --- */
 #connexion {
   text-align: right;
   top: 20px;
@@ -164,6 +178,8 @@ table {
   z-index: 10;
 }
 
+
+/* --- Style du lien de connexion --- */
       #connexion a {
         position: fixed;
         top: 20px;
@@ -180,11 +196,13 @@ table {
         transition: background-color 0.3s ease, transform 0.2s ease;
       }
       
+      /* --- Icône de connexion --- */
         #connexion a img {
           width: 28px;
           height: 28px;
         }
 
+/* --- Effet au survol selon le thème --- */
         body.dark #connexion a:hover {
           background-color: #0056b3;
         }
@@ -193,6 +211,7 @@ table {
           background-color: #ffd700,
         }
 
+/* --- Bouton du mode nuit (icône rond en haut à gauche) --- */
 .modenuit {
   position: fixed;
   top: 20px;
@@ -206,11 +225,14 @@ table {
   transition: transform 0.3s ease, filter 0.3s ease;
 }
 
+/* --- Petit effet de zoom/luminosité au survol --- */
       .modenuit:hover {
         transform: scale(1.1);
         filter: brightness(1.2);
       }
 
+
+/* --- Pied de page --- */
 footer {
   text-align: center;
   padding: 20px;
@@ -219,6 +241,7 @@ footer {
   position: relative;
   z-index: 5;
 }
+
 
 #codephp1 {
   color: #e7c83d;
@@ -247,6 +270,7 @@ footer {
   height: 28px;
 }
 
+/*boite de connexion*/
 .user-menu .dropdown {
   display: none;
   position: absolute;
@@ -259,19 +283,36 @@ footer {
   min-width: 160px;
 }
 
-.user-menu .dropdown a {
-  padding: 10px 15px;
+        .user-menu .dropdown a {
+          padding: 10px 15px;
+          color: #fff;
+          text-decoration: none;
+          display: block;
+          font-size: 0.9rem;
+        }
+
+        .user-menu .dropdown a:hover {
+          background: #007bff;
+        }
+
+
+        .user-menu:hover .dropdown {
+          display: flex;
+        }
+
+
+/* --- En-tête de tableau --- */
+.th {
+  background-color: #007bff;
   color: #fff;
-  text-decoration: none;
-  display: block;
-  font-size: 0.9rem;
+  font-weight: 600;
 }
 
-.user-menu .dropdown a:hover {
-  background: #007bff;
-}
+/* --- Couleurs du header de tableau selon le thème --- */
+  body.dark table th {
+      background-color: rgb(10 16 26 / 46%);
+  }
 
-
-.user-menu:hover .dropdown {
-  display: flex;
-}
+ body.light table th {
+    background-color: #cf9aae;
+ }

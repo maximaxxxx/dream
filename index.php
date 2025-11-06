@@ -107,7 +107,7 @@ if (!$page_existe) {
 
 
 
-<script> //cette partie a été corrgié par de l'ia... j'avais oublié comment le lexyque du js 
+<script> 
 document.addEventListener("DOMContentLoaded", function() {
   const body = document.body;
   const toggleBtn = document.getElementById("toggleTheme");
@@ -224,11 +224,16 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         elseif ($nom_table == "REVEUR") 
             {
-            $query = $conn->query("SELECT * FROM REVEUR ORDER BY nom ASC;");
+            $query = $conn->query("
+                                SELECT R.nom, R.prenom, R.date_de_naissance, R.age_mental,
+                                    R.genre_de_la_personne, R.pays, R.niveau_peur, P.nom_peur
+                                FROM REVEUR R
+                                LEFT JOIN PEUR P ON R.id_peur = P.id_peur
+                                ORDER BY R.nom ASC
+                            ");
             $resultat_reveur = $query->fetchAll();
-           
 
-
+ 
             // Afficher le résultat dans un tableau
 
             print("<table border=5>");
@@ -240,6 +245,7 @@ document.addEventListener("DOMContentLoaded", function() {
             print("<th>Genre</th>");
             print("<th>pays</th>");
             print("<th>Niveau de Peur</th>");
+            print("<th>Nom de Peur</th>");
             print("<tr>"); 
             foreach ($resultat_reveur as $key => $variable)
             {
@@ -251,6 +257,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 print("<td>".$resultat_reveur[$key]['genre_de_la_personne']."</td>");
                 print("<td>".$resultat_reveur[$key]['pays']."</td>");
                 print("<td>".$resultat_reveur[$key]['niveau_peur']."</td>");
+                print("<td>".$resultat_reveur[$key]['nom_peur']."</td>");
                 print("<tr>");
             }
             print("</table>");
@@ -340,18 +347,28 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         elseif ($nom_table == "PERSONNAGE_PRINCIPAL") 
             {
-            $query = $conn->query("SELECT * FROM PERSONNAGE_PRINCIPAL ORDER BY type_de_personnage ASC;");
+            $query = $conn->query("SELECT * FROM PERSONNAGE_PRINCIPAL ORDER BY type_personnage ASC;");
             $resultat_personnage = $query->fetchAll();
 
             // Afficher le résultat dans un tableau
-
+            print('<form method="post" action="index.php">
+                    <label for="liste"> <b><u> Recherche type de personnage:</u></b><br>
+                    <select name="choix1" id="liste">');
+            foreach ($resultat_personnage as $key => $variable)
+            {
+                print("<option value='".$resultat_personnage[$key]["id_personnage_principal"]."'>".$resultat_personnage[$key]["nom_personnage"]."</option>");
+            }
+            print('</select> <br>
+                    <input type="submit" value="Ok" name="valider5"/>
+                    </form>');
+        
             print("<table border=5>");
             print("<tr>");
             print("<th>Type de personnage</th>");
             print("<th>Nom du personnage</th>");
             print("<th>La relation avec le reveur</th>");
             print("<th>Personnage fictif</th>");
-            print("<th>Personnage réel</th>");
+            print("<th>Personnage reel</th>");
             print("<tr>"); 
             foreach ($resultat_personnage as $key => $variable)
             {
@@ -360,7 +377,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 print("<td>".$resultat_personnage[$key]['nom_personnage']."</td>");
                 print("<td>".$resultat_personnage[$key]['relation_reveur']."</td>");
                 print("<td>".$resultat_personnage[$key]['personnage_fictif']."</td>");
-                print("<td>".$resultat_personnage[$key]['personnage_réel']."</td>");
+                print("<td>".$resultat_personnage[$key]['personnage_reel']."</td>");
                 print("<tr>");
             }
             print("</table>");
@@ -399,7 +416,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
                 elseif ($nom_table == "TYPE_ELEMENT_DANS_LE_REVE") 
             {
-            $query = $conn->query("SELECT * FROM TYPE_ELEMENT_DANS_LE_REVE ORDER BY nom_element ASC;");
+            $query = $conn->query("SELECT * FROM TYPE_ELEMENT_DANS_LE_REVE ORDER BY type_element ASC;");
             $resultat_element = $query->fetchAll();
 
             // Afficher le résultat dans un tableau
@@ -448,7 +465,10 @@ document.addEventListener("DOMContentLoaded", function() {
                     {
                     echo "<br>Ok !<br>";
                     $numero1 = $_POST["choix1"];
-                    $query = $conn->query("SELECT nom_peur, nom, prenom FROM REVEUR JOIN PEUR ON REVEUR.id_peur = PEUR.id_peur WHERE REVEUR.id_peur = ".$numero1.";");
+                    $query = $conn->query("SELECT nom_peur, nom, prenom 
+                    FROM REVEUR 
+                    JOIN PEUR ON REVEUR.id_peur = PEUR.id_peur 
+                    WHERE REVEUR.id_peur = ".$numero1.";");
                     $resultat_nom_prenom_peur = $query->fetchAll();
                     print("<table border=5>");
                     print("<tr>");
@@ -469,20 +489,20 @@ document.addEventListener("DOMContentLoaded", function() {
         elseif (isset($_POST["valider2"]) && $_POST["valider2"] == "Ok")
                     {
                     echo "<br>Ok !<br>";
-                    $numero2 = $_POST["choix1"];
+                    $numero2 = $_POST["choix1"]; //représente l’ID d’un trouble de santé choisi par l’utilisateur.
                     $query = $conn->query("SELECT TROUBLE_DE_SANTE.nom AS trouble_nom, REVEUR.nom AS reveur_nom, REVEUR.prenom AS reveur_prenom 
                     FROM REVEUR 
                     JOIN LIAISON_TROUBLE_DE_SANTE ON REVEUR.id_reveur = LIAISON_TROUBLE_DE_SANTE.id_reveur 
                     JOIN TROUBLE_DE_SANTE ON LIAISON_TROUBLE_DE_SANTE.id_trouble_de_sante = TROUBLE_DE_SANTE.id_trouble_de_sante  
-                    WHERE TROUBLE_DE_SANTE.id_trouble_de_sante ORDER BY reveur_nom ASC= ".$numero2.";");
-                    $resultat_nom_prenom_trouble = $query->fetchAll();
+                    WHERE TROUBLE_DE_SANTE.id_trouble_de_sante ORDER BY reveur_nom ASC= ".$numero2.";");//on a fait les jointure pour recup les don,né neccessaire au noueau table
+                    $resultat_nom_prenom_trouble = $query->fetchAll();//on affiche les colonne du tableau 
                     print("<table border=5>");
                     print("<tr>");
                     print("<th>Nom du trouble</th>");
                     print("<th>Nom</th>");
                     print("<th>Prenom</th>");
                     print("<tr>"); 
-                    foreach ($resultat_nom_prenom_trouble as $key => $variable)
+                    foreach ($resultat_nom_prenom_trouble as $key => $variable) //on met ici la boucles qui va afficher les donnés
                 {
                     print("<tr>");
                     print("<td>".$resultat_nom_prenom_trouble[$key]['trouble_nom']."</td>");
@@ -521,14 +541,17 @@ document.addEventListener("DOMContentLoaded", function() {
                         print("<td>".$resultat_emotion[$key]['reveur_prenom']."</td>");
                         print("</tr>");
                     }
-                    print("</table>");
+                print("</table>");
                 }
                 
                 elseif (isset($_POST["valider4"]) && $_POST["valider4"] == "Ok")
                     {
                     echo "<br>Ok !<br>";
                     $numero4 = $_POST["choix1"];
-                    $query = $conn->query("SELECT langue, nom, prenom FROM REVEUR JOIN LIAISON_LANGUE ON REVEUR.id_reveur = LIAISON_LANGUE.id_reveur JOIN LANGUE ON LIAISON_LANGUE.id_langue = LANGUE.id_langue  WHERE LANGUE.id_langue = ".$numero4.";");
+                    $query = $conn->query("SELECT langue, nom, prenom FROM REVEUR 
+                    JOIN LIAISON_LANGUE ON REVEUR.id_reveur = LIAISON_LANGUE.id_reveur 
+                    JOIN LANGUE ON LIAISON_LANGUE.id_langue = LANGUE.id_langue  
+                    WHERE LANGUE.id_langue = ".$numero4.";");
                     $resultat_langue = $query->fetchAll();
                     print("<table border=5>");
                     print("<tr>");
@@ -546,9 +569,39 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
                 print("</table>");
                 }
+                elseif (isset($_POST["valider5"]) && $_POST["valider5"] == "Ok")
+                    {
+                    echo "<br>Ok !<br>";
+                    $numero5 = $_POST["choix1"];
+                    $query = $conn->query("SELECT type_personnage, nom_personnage, relation_reveur, REVEUR.nom AS reveur_nom, REVEUR.prenom AS reveur_prenom 
+                                        FROM REVEUR
+                                        JOIN REVE ON REVEUR.id_reveur = REVE.id_reveur
+                                        JOIN PERSONNAGE_PRINCIPAL ON REVE.id_personnage_principal = PERSONNAGE_PRINCIPAL.id_personnage_principal
+                                        WHERE PERSONNAGE_PRINCIPAL.id_reveur = ".$numero5.";");
+                    $resultat_nom_prenom_personnage = $query->fetchAll();
+
+                    print("<table border=5>");
+                    print("<tr>");
+                    print("<th>Type de personnage</th>");
+                    print("<th>Nom du personnage</th>");
+                    print("<th>Relation du reveur</th>");
+                    print("<th>Nom du rêveur</th>");
+                    print("<th>Prénom du rêveur</th>");
+                    print("</tr>");
+
+                    foreach ($resultat_nom_prenom_personnage as $key => $variable) {
+                        print("<tr>");
+                        print("<td>".$resultat_nom_prenom_personnage[$key]['type_personnage']."</td>");
+                        print("<td>".$resultat_nom_prenom_personnage[$key]['nom_personnage']."</td>");
+                        print("<td>".$resultat_nom_prenom_personnage[$key]['relation_reveur']."</td>");
+                        print("<td>".$resultat_nom_prenom_personnage[$key]['reveur_nom']."</td>");
+                        print("<td>".$resultat_nom_prenom_personnage[$key]['reveur_prenom']."</td>");
+                        print("</tr>");
+                    }
+                print("</table>");
+                }
     
     
     ?>
         </body>
 </html>
-
