@@ -16,7 +16,7 @@ html, body {
   background: linear-gradient(135deg, #ffb347, #e747ff);
   color: #222;
   overflow-y: auto;
-  overscroll-behavior: contain;
+  overscroll-behavior: none;
 }
 
 /* Mode sombre */

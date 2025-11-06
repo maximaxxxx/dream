@@ -38,7 +38,7 @@ html, body {
 
 
       body.light {
-        background: linear-gradient(123deg, #e747ff, #ffb347);
+        background: linear-gradient(123deg, #ffb347, #e747ff);
         color: #ffffff;
       }
 
